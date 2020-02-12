@@ -85,12 +85,57 @@ describe("Tests for ChangeHandler", function() {
 
     // Remember, you can arrange, act, and assert...start small
     expect(test.giveChange()).toEqual({
+      quarters: 1,
+      dimes: 0,
+      nickels: 1,
+      pennies: 2
+    });
+  });
 
-        quarters: 1,
-        dimes: 0,
-        nickels: 1,
-        pennies: 2
-     
+  test("10 change produces: quarters: 0, dimes: 1, nickels: 0, pennies: 0", function() {
+    let test = new ChangeHandler(0);
+    test.insertCoin("dimes");
+
+    // Remember, you can arrange, act, and assert...start small
+    expect(test.giveChange()).toEqual({
+      quarters: 0,
+      dimes: 1,
+      nickels: 0,
+      pennies: 0
+    });
+  });
+
+  test("27 change produces: quarters: 1, dimes: 0, nickels: 0, pennies: 2.", function() {
+    let test = new ChangeHandler(0);
+    test.insertCoin("quarters");
+    test.insertCoin("pennies");
+    test.insertCoin("pennies");
+
+    // Remember, you can arrange, act, and assert...start small
+    expect(test.giveChange()).toEqual({
+      quarters: 1,
+      dimes: 0,
+      nickels: 0,
+      pennies: 2
+    });
+  });
+
+  test("68 change produces: quarters: 2, dimes: 1, nickels: 1, pennies: 3", function() {
+    let test = new ChangeHandler(0);
+    test.insertCoin("quarters");
+    test.insertCoin("quarters");
+    test.insertCoin("dimes");
+    test.insertCoin("nickels");
+    test.insertCoin("pennies");
+    test.insertCoin("pennies");
+    test.insertCoin("pennies");
+
+    // Remember, you can arrange, act, and assert...start small
+    expect(test.giveChange()).toEqual({
+      quarters: 2,
+      dimes: 1,
+      nickels: 1,
+      pennies: 3
     });
   });
 });
